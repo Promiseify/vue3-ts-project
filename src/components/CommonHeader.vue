@@ -27,8 +27,8 @@
 </template>
 
 <script setup lang="ts">
-// import { ref } from 'vue'
-const getImageUrl = (user) => {
+import { ref } from 'vue'
+const getImageUrl = (user: String) => {
   return new URL(`../assets/images/${user}.jpg`, import.meta.url).href
 }
 

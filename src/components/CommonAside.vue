@@ -27,12 +27,18 @@
         </el-menu-item>
       </template>
     </el-menu>
+
+    <div>
+      <ToggleBar id="toggleBar-container" :is-active="sidebar.opened" class="toggleBar-container" />
+    </div>
   </el-aside>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import { MenuItem } from "@/types/components/commonAside";
+import { useAppStore } from '@/store/app';
+const appStore = useAppStore();
 
 const menuList = ref<MenuItem[]>([
   {
