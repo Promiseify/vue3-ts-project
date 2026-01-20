@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <el-aside width="180px">
     <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
-      <h3>后台管理系统</h3>
+      <h2 class="aside-title">后台管理系统</h2>
       <template v-for="item in menuList" :index="item.path" :key="item.path">
         <el-sub-menu v-if="item.children" :index="item.path">
           <template #title>
@@ -27,7 +27,7 @@
         </el-menu-item>
       </template>
     </el-menu>
-  </div>
+  </el-aside>
 </template>
 
 <script setup lang="ts">
@@ -109,7 +109,6 @@ const menuList = ref<MenuItem[]>([
   }
 ])
 
-const isCollapse = ref(true)
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }
@@ -119,4 +118,11 @@ const handleClose = (key: string, keyPath: string[]) => {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+.aside-title {
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  font-size: 22px;
+}
+</style>

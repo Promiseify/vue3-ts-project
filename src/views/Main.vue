@@ -16,6 +16,7 @@
 
 <script setup lang="ts">
 import CommonAside from '@/components/CommonAside.vue';
+import CommonHeader from '@/components/CommonHeader.vue';
 </script>
 
 <style scoped lang="less">
