@@ -1,7 +1,8 @@
 <template>
-  <el-aside :width="isCollapse? '64px' : '180px'">
+  <el-aside :width="isCollapse ? '64px' : '180px'">
     <h2 class="aside-title">{{ isCollapse ? '系统' : '后台管理系统' }}</h2>
-    <el-menu :collapse="isCollapse" :collapse-transition="false" default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
+    <el-menu :collapse="isCollapse" :collapse-transition="false" class="el-menu-vertical-demo" @open="handleOpen"
+      @close="handleClose" :default-active="currentRoute.path" router>
       <template v-for="item in menuList" :index="item.path" :key="item.path">
         <el-sub-menu v-if="item.children" :index="item.path">
           <template #title>
@@ -36,9 +37,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { storeToRefs } from 'pinia';
 import { useAppStore } from '@/store/app';
+import { useRoute } from 'vue-router'
 
 import { MenuItem } from "@/types/components/commonAside";
 
@@ -129,6 +131,12 @@ const handleClose = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }
 
+const route = useRoute();
+// 计算属性：实时获取当前路由路径，确保菜单高亮
+const currentRoute = computed(() => ({
+  path: route.path
+}));
+
 // 处理侧边栏的折叠
 const { isCollapse } = storeToRefs(appStore)
 const handleToggle = () => {
@@ -143,6 +151,7 @@ const handleToggle = () => {
   transition: width 0.3s;
   overflow: hidden;
 }
+
 .aside-title {
   height: 50px;
   line-height: 50px;
@@ -168,5 +177,4 @@ const handleToggle = () => {
     cursor: pointer;
   }
 }
-
 </style>
